@@ -10,41 +10,51 @@ const SAMPLE_COUPONS = [
     id: 1,
     code: "SAVE20",
     discount: "20% Off",
-    description: "Save 20% on Electronics",
+    description: "Save 20% on the latest Electronics including smartphones, laptops, and accessories",
     expiryDate: "2024-05-01",
     category: "Electronics",
+    productImage: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
+    amazonLink: "https://www.amazon.com/electronics"
   },
   {
     id: 2,
     code: "FASHION30",
     discount: "30% Off",
-    description: "Get 30% off on Fashion items",
+    description: "Get 30% off on trending Fashion items including clothing, shoes, and accessories",
     expiryDate: "2024-04-15",
     category: "Fashion",
+    productImage: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&q=80",
+    amazonLink: "https://www.amazon.com/fashion"
   },
   {
     id: 3,
     code: "BOOKS15",
     discount: "15% Off",
-    description: "Save on your favorite books",
+    description: "Save on bestselling Books across all genres including fiction, non-fiction, and educational",
     expiryDate: "2024-04-30",
     category: "Books",
+    productImage: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
+    amazonLink: "https://www.amazon.com/books"
   },
   {
     id: 4,
     code: "HOME25",
     discount: "25% Off",
-    description: "Discount on Home items",
+    description: "Discount on premium Home items including furniture, decor, and kitchen essentials",
     expiryDate: "2024-05-15",
     category: "Home",
+    productImage: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
+    amazonLink: "https://www.amazon.com/home"
   },
   {
     id: 5,
     code: "BEAUTY40",
     discount: "40% Off",
-    description: "Save big on Beauty products",
+    description: "Save big on luxury Beauty products including skincare, makeup, and fragrances",
     expiryDate: "2024-04-20",
     category: "Beauty",
+    productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
+    amazonLink: "https://www.amazon.com/beauty"
   },
 ];
 
@@ -90,6 +100,8 @@ const Index = () => {
               description={coupon.description}
               expiryDate={coupon.expiryDate}
               category={coupon.category}
+              productImage={coupon.productImage}
+              amazonLink={coupon.amazonLink}
             />
           ))}
         </div>
