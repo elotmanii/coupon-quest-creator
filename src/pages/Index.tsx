@@ -71,15 +71,21 @@ const Index = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const getShareableUrl = () => {
+    // Use a fallback URL if window is not defined (SSR) or location is not available
+    if (typeof window === 'undefined') return 'https://amazingdeals.com';
+    return window.location.origin + window.location.pathname;
+  };
+
   const shareOnFacebook = () => {
-    const url = encodeURIComponent(window.location.href);
+    const url = encodeURIComponent(getShareableUrl());
     const text = encodeURIComponent("Check out these amazing Amazon deals!");
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
   };
 
   const shareOnTelegram = () => {
-    const text = encodeURIComponent("Check out these amazing Amazon deals!\n\n" + window.location.href);
-    window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${text}`, '_blank');
+    const text = encodeURIComponent("Check out these amazing Amazon deals!\n\n" + getShareableUrl());
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(getShareableUrl())}&text=${text}`, '_blank');
   };
 
   return (
