@@ -2,6 +2,8 @@ import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
+import { Button } from "@/components/ui/button";
+import { Facebook, Share2 } from "lucide-react";
 
 const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 
@@ -69,6 +71,17 @@ const Index = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const shareOnFacebook = () => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("Check out these amazing Amazon deals!");
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+  };
+
+  const shareOnTelegram = () => {
+    const text = encodeURIComponent("Check out these amazing Amazon deals!\n\n" + window.location.href);
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${text}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -79,6 +92,24 @@ const Index = () => {
           <p className="text-lg text-gray-300 animate-fade-in">
             Discover the best Amazon coupons and save on your next purchase
           </p>
+          <div className="flex justify-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-[#1877F2] hover:text-[#1877F2]/80 hover:bg-white/10"
+              onClick={shareOnFacebook}
+            >
+              <Facebook className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-[#0088cc] hover:text-[#0088cc]/80 hover:bg-white/10"
+              onClick={shareOnTelegram}
+            >
+              <Share2 className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
 
         <SearchBar onSearch={setSearchQuery} />
