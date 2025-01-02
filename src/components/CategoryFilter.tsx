@@ -12,7 +12,11 @@ const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }: Cate
       <Button
         variant={selectedCategory === "all" ? "default" : "ghost"}
         onClick={() => onSelectCategory("all")}
-        className="rounded-full"
+        className={`rounded-full ${
+          selectedCategory === "all"
+            ? "bg-[#FF9900] hover:bg-[#FF9900]/80"
+            : "text-white hover:bg-white/10"
+        }`}
       >
         All
       </Button>
@@ -21,7 +25,11 @@ const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }: Cate
           key={category}
           variant={selectedCategory === category ? "default" : "ghost"}
           onClick={() => onSelectCategory(category)}
-          className="rounded-full"
+          className={`rounded-full ${
+            selectedCategory === category
+              ? "bg-[#FF9900] hover:bg-[#FF9900]/80"
+              : "text-white hover:bg-white/10"
+          }`}
         >
           {category}
         </Button>

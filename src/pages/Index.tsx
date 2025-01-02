@@ -60,20 +60,20 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
       <div className="max-w-7xl mx-auto space-y-8">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-fade-in">
             Amazing Deals
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-300 animate-fade-in">
             Discover the best Amazon coupons and save on your next purchase
           </p>
         </div>
 
         <SearchBar onSearch={setSearchQuery} />
 
-        <div className="flex justify-center">
+        <div className="flex justify-center animate-fade-in">
           <CategoryFilter
             categories={CATEGORIES}
             selectedCategory={selectedCategory}
@@ -81,7 +81,7 @@ const Index = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
           {filteredCoupons.map((coupon) => (
             <CouponCard
               key={coupon.id}
