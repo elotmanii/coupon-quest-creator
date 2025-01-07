@@ -115,7 +115,7 @@ const Index = () => {
           </div>
 
           {/* Desktop Ad Banner */}
-          <div className="hidden lg:block w-80 h-[600px] sticky top-8">
+          <div className="hidden lg:block w-64 h-[600px] sticky top-8">
             <a 
               href="https://www.amazon.com" 
               target="_blank" 
@@ -145,7 +145,7 @@ const Index = () => {
             href="https://www.amazon.com" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block w-full h-[200px] overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-[1.02] border border-gray-200 relative"
+            className="block w-[90%] mx-auto h-[200px] overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-[1.02] border border-gray-200 relative"
           >
             <div className="absolute top-0 left-0 bg-yellow-400 text-xs px-2 py-1 rounded-br-lg text-black font-medium z-10">
               Ad
