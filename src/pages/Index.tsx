@@ -3,7 +3,7 @@ import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import { Button } from "@/components/ui/button";
-import { Facebook, Share2 } from "lucide-react";
+import { Facebook, Share2, ShoppingCart } from "lucide-react";
 
 const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 
@@ -90,57 +90,67 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-fade-in">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col items-center mb-8">
+          <div className="flex items-center gap-2 text-[#FF9900] mb-4">
+            <ShoppingCart className="h-8 w-8" />
+            <span className="text-2xl font-bold">CouponQuest</span>
+          </div>
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
             Amazing Deals
           </h1>
-          <p className="text-lg text-gray-300 animate-fade-in">
+          <p className="text-lg text-gray-300 mt-4">
             Discover the best Amazon coupons and save on your next purchase
           </p>
-          <div className="flex justify-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-[#1877F2] hover:text-[#1877F2]/80 hover:bg-white/10"
-              onClick={shareOnFacebook}
-            >
-              <Facebook className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-[#0088cc] hover:text-[#0088cc]/80 hover:bg-white/10"
-              onClick={shareOnTelegram}
-            >
-              <Share2 className="h-5 w-5" />
-            </Button>
+        </div>
+
+        <div className="flex gap-8">
+          <div className="flex-1">
+            <SearchBar onSearch={setSearchQuery} />
+
+            <div className="flex justify-center mt-8">
+              <CategoryFilter
+                categories={CATEGORIES}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+              {filteredCoupons.map((coupon) => (
+                <CouponCard
+                  key={coupon.id}
+                  code={coupon.code}
+                  discount={coupon.discount}
+                  description={coupon.description}
+                  expiryDate={coupon.expiryDate}
+                  category={coupon.category}
+                  productImage={coupon.productImage}
+                  amazonLink={coupon.amazonLink}
+                />
+              ))}
+            </div>
           </div>
-        </div>
 
-        <SearchBar onSearch={setSearchQuery} />
-
-        <div className="flex justify-center animate-fade-in">
-          <CategoryFilter
-            categories={CATEGORIES}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-          {filteredCoupons.map((coupon) => (
-            <CouponCard
-              key={coupon.id}
-              code={coupon.code}
-              discount={coupon.discount}
-              description={coupon.description}
-              expiryDate={coupon.expiryDate}
-              category={coupon.category}
-              productImage={coupon.productImage}
-              amazonLink={coupon.amazonLink}
-            />
-          ))}
+          {/* Ad Banner Section */}
+          <div className="hidden lg:block w-64 h-[600px] sticky top-8">
+            <a 
+              href="https://www.amazon.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block w-full h-full overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-[1.02]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+                alt="Special Offer"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="text-white text-lg font-bold">Special Offer</p>
+                <p className="text-white/80 text-sm">Click to learn more</p>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
