@@ -2,8 +2,7 @@ import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
-import { Button } from "@/components/ui/button";
-import { Facebook, Share2, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 
 const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 
@@ -71,23 +70,6 @@ const Index = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const getShareableUrl = () => {
-    // Use a fallback URL if window is not defined (SSR) or location is not available
-    if (typeof window === 'undefined') return 'https://amazingdeals.com';
-    return window.location.origin + window.location.pathname;
-  };
-
-  const shareOnFacebook = () => {
-    const url = encodeURIComponent(getShareableUrl());
-    const text = encodeURIComponent("Check out these amazing Amazon deals!");
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
-  };
-
-  const shareOnTelegram = () => {
-    const text = encodeURIComponent("Check out these amazing Amazon deals!\n\n" + getShareableUrl());
-    window.open(`https://t.me/share/url?url=${encodeURIComponent(getShareableUrl())}&text=${text}`, '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
       <div className="max-w-7xl mx-auto">
@@ -133,13 +115,16 @@ const Index = () => {
           </div>
 
           {/* Ad Banner Section */}
-          <div className="hidden lg:block w-64 h-[600px] sticky top-8">
+          <div className="hidden lg:block w-80 h-[600px] sticky top-8">
             <a 
               href="https://www.amazon.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block w-full h-full overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-[1.02]"
+              className="block w-full h-full overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-[1.02] border border-gray-200"
             >
+              <div className="absolute top-0 left-0 bg-yellow-400 text-xs px-2 py-1 rounded-br-lg text-black font-medium">
+                Ad
+              </div>
               <img
                 src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
                 alt="Special Offer"
@@ -147,7 +132,8 @@ const Index = () => {
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                 <p className="text-white text-lg font-bold">Special Offer</p>
-                <p className="text-white/80 text-sm">Click to learn more</p>
+                <p className="text-white/80 text-sm">Limited Time Deal</p>
+                <p className="text-[#FF9900] text-sm mt-2 hover:underline">Shop Now ›</p>
               </div>
             </a>
           </div>
