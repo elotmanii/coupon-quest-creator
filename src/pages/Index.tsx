@@ -86,7 +86,31 @@ const Index = () => {
           </p>
         </div>
 
-        <div className="flex gap-8">
+        {/* Mobile Ad Banner */}
+        <div className="lg:hidden w-full mb-8">
+          <a 
+            href="https://www.amazon.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block w-full h-[200px] overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-[1.02] border border-gray-200 relative"
+          >
+            <div className="absolute top-0 left-0 bg-yellow-400 text-xs px-2 py-1 rounded-br-lg text-black font-medium z-10">
+              Ad
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+              alt="Special Offer"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+              <p className="text-white text-lg font-bold">Special Offer</p>
+              <p className="text-white/80 text-sm">Limited Time Deal</p>
+              <p className="text-[#FF9900] text-sm mt-2 hover:underline">Shop Now ›</p>
+            </div>
+          </a>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
           <div className="flex-1">
             <SearchBar onSearch={setSearchQuery} />
 
@@ -114,7 +138,7 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Ad Banner Section */}
+          {/* Desktop Ad Banner */}
           <div className="hidden lg:block w-80 h-[600px] sticky top-8">
             <a 
               href="https://www.amazon.com" 
