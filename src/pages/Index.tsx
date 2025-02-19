@@ -82,24 +82,29 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-center mb-8">
-          <div className="flex items-center gap-2 text-[#FF9900] mb-4">
+        {/* Header Section */}
+        <div className="flex flex-col items-center mb-12 text-center">
+          <div className="flex items-center gap-2 text-[#FF9900] mb-6">
             <ShoppingCart className="h-8 w-8" />
             <span className="text-2xl font-bold">CouponQuest</span>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-4">
             Amazing Deals
           </h1>
-          <p className="text-lg text-gray-300 mt-4">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Discover the best coupons and save on your next purchase
           </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="flex-1">
-            <SearchBar onSearch={setSearchQuery} />
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-12">
+              <SearchBar onSearch={setSearchQuery} />
+            </div>
 
-            <div className="flex flex-col items-center gap-6 mt-8">
+            {/* Filters Section */}
+            <div className="flex flex-col items-center gap-8 mb-12">
               {/* Marketplace Toggle */}
               <div className="bg-white/10 p-1 rounded-lg">
                 <ToggleGroup 
@@ -132,6 +137,7 @@ const Index = () => {
                 </ToggleGroup>
               </div>
 
+              {/* Category Filter */}
               <CategoryFilter
                 categories={CATEGORIES}
                 selectedCategory={selectedCategory}
@@ -139,7 +145,8 @@ const Index = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            {/* Coupons Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {filteredCoupons.map((coupon) => (
                 <CouponCard
                   key={coupon.id}
