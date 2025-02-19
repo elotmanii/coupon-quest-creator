@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Facebook, Send } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Button } from "@/components/ui/button";
 
 const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 
@@ -91,9 +91,29 @@ const Index = () => {
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-4">
             Amazing Deals
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
             Discover the best coupons and save on your next purchase
           </p>
+
+          {/* Social Media Buttons */}
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none"
+              onClick={() => window.open('https://t.me/your-group', '_blank')}
+            >
+              <Send className="mr-2 h-4 w-4" />
+              Join Telegram
+            </Button>
+            <Button
+              variant="outline"
+              className="bg-[#1877F2] text-white hover:bg-[#1877F2]/90 border-none"
+              onClick={() => window.open('https://facebook.com/groups/your-group', '_blank')}
+            >
+              <Facebook className="mr-2 h-4 w-4" />
+              Join Facebook Group
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
