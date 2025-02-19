@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Copy, Clock, Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ interface CouponCardProps {
   category: string;
   productImage?: string;
   amazonLink?: string;
+  marketplace?: 'amazon' | 'aliexpress';
 }
 
 const CouponCard = ({ 
@@ -20,7 +22,8 @@ const CouponCard = ({
   expiryDate, 
   category,
   productImage = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
-  amazonLink = "https://www.amazon.com"
+  amazonLink = "https://www.amazon.com",
+  marketplace = "amazon"
 }: CouponCardProps) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -36,9 +39,13 @@ const CouponCard = ({
     toast.success(isFavorited ? "Removed from favorites" : "Added to favorites");
   };
 
-  const handleAmazonClick = (e: React.MouseEvent) => {
+  const handleMarketplaceClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     window.open(amazonLink, '_blank');
+  };
+
+  const getMarketplaceColor = () => {
+    return marketplace === 'amazon' ? '#FF9900' : '#ff4747';
   };
 
   return (
@@ -81,10 +88,10 @@ const CouponCard = ({
             
             <Button
               variant="link"
-              className="text-[#FF9900] hover:text-[#FF9900]/80 p-0 h-auto font-medium text-sm"
-              onClick={handleAmazonClick}
+              className={`text-[${getMarketplaceColor()}] hover:text-[${getMarketplaceColor()}]/80 p-0 h-auto font-medium text-sm`}
+              onClick={handleMarketplaceClick}
             >
-              View on Amazon <ExternalLink className="ml-1 h-4 w-4" />
+              View on {marketplace === 'amazon' ? 'Amazon' : 'AliExpress'} <ExternalLink className="ml-1 h-4 w-4" />
             </Button>
           </div>
         </div>

@@ -177,6 +177,7 @@ const Index = () => {
                   category={coupon.category}
                   productImage={coupon.productImage}
                   amazonLink={coupon.amazonLink}
+                  marketplace={coupon.marketplace}
                 />
               ))}
             </div>
