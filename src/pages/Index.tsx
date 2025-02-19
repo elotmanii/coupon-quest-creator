@@ -1,8 +1,10 @@
+
 import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import { ShoppingCart } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 
@@ -15,7 +17,8 @@ const SAMPLE_COUPONS = [
     expiryDate: "2024-05-01",
     category: "Electronics",
     productImage: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
-    amazonLink: "https://www.amazon.com/electronics"
+    amazonLink: "https://www.amazon.com/electronics",
+    marketplace: "amazon"
   },
   {
     id: 2,
@@ -25,27 +28,30 @@ const SAMPLE_COUPONS = [
     expiryDate: "2024-04-15",
     category: "Fashion",
     productImage: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&q=80",
-    amazonLink: "https://www.amazon.com/fashion"
+    amazonLink: "https://www.amazon.com/fashion",
+    marketplace: "amazon"
   },
   {
     id: 3,
-    code: "BOOKS15",
+    code: "ALIBOOKS15",
     discount: "15% Off",
-    description: "Save on bestselling Books across all genres including fiction, non-fiction, and educational",
+    description: "Save on bestselling Books across all genres on AliExpress",
     expiryDate: "2024-04-30",
     category: "Books",
     productImage: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
-    amazonLink: "https://www.amazon.com/books"
+    amazonLink: "https://www.aliexpress.com/books",
+    marketplace: "aliexpress"
   },
   {
     id: 4,
-    code: "HOME25",
+    code: "ALIHOME25",
     discount: "25% Off",
-    description: "Discount on premium Home items including furniture, decor, and kitchen essentials",
+    description: "Discount on premium Home items from AliExpress",
     expiryDate: "2024-05-15",
     category: "Home",
     productImage: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
-    amazonLink: "https://www.amazon.com/home"
+    amazonLink: "https://www.aliexpress.com/home",
+    marketplace: "aliexpress"
   },
   {
     id: 5,
@@ -55,19 +61,22 @@ const SAMPLE_COUPONS = [
     expiryDate: "2024-04-20",
     category: "Beauty",
     productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
-    amazonLink: "https://www.amazon.com/beauty"
+    amazonLink: "https://www.amazon.com/beauty",
+    marketplace: "amazon"
   },
 ];
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedMarketplace, setSelectedMarketplace] = useState("all");
 
   const filteredCoupons = SAMPLE_COUPONS.filter((coupon) => {
     const matchesSearch = coupon.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          coupon.code.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || coupon.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesMarketplace = selectedMarketplace === "all" || coupon.marketplace === selectedMarketplace;
+    return matchesSearch && matchesCategory && matchesMarketplace;
   });
 
   return (
@@ -82,7 +91,7 @@ const Index = () => {
             Amazing Deals
           </h1>
           <p className="text-lg text-gray-300 mt-4">
-            Discover the best Amazon coupons and save on your next purchase
+            Discover the best coupons and save on your next purchase
           </p>
         </div>
 
@@ -90,7 +99,39 @@ const Index = () => {
           <div className="flex-1">
             <SearchBar onSearch={setSearchQuery} />
 
-            <div className="flex justify-center mt-8">
+            <div className="flex flex-col items-center gap-6 mt-8">
+              {/* Marketplace Toggle */}
+              <div className="bg-white/10 p-1 rounded-lg">
+                <ToggleGroup 
+                  type="single" 
+                  value={selectedMarketplace}
+                  onValueChange={(value) => {
+                    if (value) setSelectedMarketplace(value);
+                    if (!value) setSelectedMarketplace("all");
+                  }}
+                  className="flex gap-1"
+                >
+                  <ToggleGroupItem 
+                    value="all" 
+                    className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white"
+                  >
+                    All
+                  </ToggleGroupItem>
+                  <ToggleGroupItem 
+                    value="amazon" 
+                    className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white"
+                  >
+                    Amazon
+                  </ToggleGroupItem>
+                  <ToggleGroupItem 
+                    value="aliexpress" 
+                    className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white"
+                  >
+                    AliExpress
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
+
               <CategoryFilter
                 categories={CATEGORIES}
                 selectedCategory={selectedCategory}
@@ -139,7 +180,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Mobile Ad Banner - Moved to bottom */}
+        {/* Mobile Ad Banner */}
         <div className="lg:hidden w-full mt-8">
           <a 
             href="https://www.amazon.com" 
