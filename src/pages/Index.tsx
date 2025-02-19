@@ -11,25 +11,25 @@ const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 const SAMPLE_COUPONS = [
   {
     id: 1,
-    code: "SAVE20",
-    discount: "20% Off",
-    description: "Save 20% on the latest Electronics including smartphones, laptops, and accessories",
-    expiryDate: "2024-05-01",
-    category: "Electronics",
-    productImage: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
-    amazonLink: "https://www.amazon.com/electronics",
-    marketplace: "amazon"
+    code: "SUMMER2024",
+    discount: "25% OFF",
+    description: "Get 25% off on all summer essentials",
+    expiryDate: "2024-08-31",
+    category: "Fashion",
+    productImage: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80",
+    amazonLink: "https://www.amazon.com/deals",
+    marketplace: "amazon" as const
   },
   {
     id: 2,
-    code: "FASHION30",
-    discount: "30% Off",
-    description: "Get 30% off on trending Fashion items including clothing, shoes, and accessories",
-    expiryDate: "2024-04-15",
-    category: "Fashion",
-    productImage: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&q=80",
-    amazonLink: "https://www.amazon.com/fashion",
-    marketplace: "amazon"
+    code: "TECH2024",
+    discount: "₹1500 OFF",
+    description: "Save ₹1500 on electronics",
+    expiryDate: "2024-07-15",
+    category: "Electronics",
+    productImage: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&q=80",
+    amazonLink: "https://www.aliexpress.com/deals",
+    marketplace: "aliexpress" as const
   },
   {
     id: 3,

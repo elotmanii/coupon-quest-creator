@@ -1,11 +1,10 @@
 
 import { useState } from "react";
-import { Copy, Clock, Heart, ExternalLink } from "lucide-react";
+import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 interface CouponCardProps {
-  code: string;
   discount: string;
   description: string;
   expiryDate: string;
@@ -16,7 +15,6 @@ interface CouponCardProps {
 }
 
 const CouponCard = ({ 
-  code, 
   discount, 
   description, 
   expiryDate, 
@@ -26,12 +24,6 @@ const CouponCard = ({
   marketplace = "amazon"
 }: CouponCardProps) => {
   const [isFavorited, setIsFavorited] = useState(false);
-
-  const copyToClipboard = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(code);
-    toast.success("Coupon code copied to clipboard!");
-  };
 
   const toggleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -51,12 +43,11 @@ const CouponCard = ({
   return (
     <div 
       className="group relative overflow-hidden rounded-xl bg-white/10 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 backdrop-blur-sm border border-white/10"
-      onClick={copyToClipboard}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-[#232F3E]/5 to-[#FF9900]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       <div className="relative">
-        <div className="flex flex-col gap-6 mb-4">
+        <div className="flex flex-col gap-6">
           <div className="w-full h-48 rounded-lg overflow-hidden">
             <img 
               src={productImage} 
@@ -84,35 +75,22 @@ const CouponCard = ({
               </Button>
             </div>
             
-            <p className="text-sm text-gray-300 mb-2">{description}</p>
+            <p className="text-sm text-gray-300 mb-4">{description}</p>
             
-            <Button
-              variant="link"
-              className={`text-[${getMarketplaceColor()}] hover:text-[${getMarketplaceColor()}]/80 p-0 h-auto font-medium text-sm`}
-              onClick={handleMarketplaceClick}
-            >
-              View on {marketplace === 'amazon' ? 'Amazon' : 'AliExpress'} <ExternalLink className="ml-1 h-4 w-4" />
-            </Button>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center text-sm text-gray-400">
+                <span>Expires: {expiryDate}</span>
+              </div>
+              
+              <Button
+                onClick={handleMarketplaceClick}
+                className="w-full bg-gradient-to-r from-[#232F3E] to-[#FF9900] hover:opacity-90 text-white"
+              >
+                View on {marketplace === 'amazon' ? 'Amazon' : 'AliExpress'}
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </div>
-        </div>
-
-        <div className="flex items-center gap-2 mb-4">
-          <Clock className="h-4 w-4 text-gray-400" />
-          <span className="text-sm text-gray-400">Expires: {expiryDate}</span>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <div className="flex-1 rounded-lg bg-[#232F3E]/30 px-4 py-2 font-mono text-sm text-white">
-            {code}
-          </div>
-          <Button 
-            onClick={copyToClipboard}
-            variant="secondary" 
-            size="icon"
-            className="bg-[#FF9900] hover:bg-[#FF9900]/80 text-white"
-          >
-            <Copy className="h-4 w-4" />
-          </Button>
         </div>
       </div>
     </div>
