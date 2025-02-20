@@ -4,6 +4,23 @@ import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
+const SUPPLIERS = [
+  {
+    id: "amazon",
+    name: "Amazon",
+    primaryColor: "#FF9900",
+    baseUrl: "https://www.amazon.com"
+  },
+  {
+    id: "aliexpress",
+    name: "AliExpress",
+    primaryColor: "#ff4747",
+    baseUrl: "https://www.aliexpress.com"
+  }
+] as const;
+
+type MarketplaceType = typeof SUPPLIERS[number]['id'];
+
 interface CouponCardProps {
   discount: string;
   description: string;
@@ -11,7 +28,7 @@ interface CouponCardProps {
   category: string;
   productImage?: string;
   amazonLink?: string;
-  marketplace?: 'amazon' | 'aliexpress';
+  marketplace?: MarketplaceType;
 }
 
 const CouponCard = ({ 
@@ -37,7 +54,13 @@ const CouponCard = ({
   };
 
   const getMarketplaceColor = () => {
-    return marketplace === 'amazon' ? '#FF9900' : '#ff4747';
+    const supplier = SUPPLIERS.find(s => s.id === marketplace);
+    return supplier?.primaryColor || "#FF9900";
+  };
+
+  const getMarketplaceName = () => {
+    const supplier = SUPPLIERS.find(s => s.id === marketplace);
+    return supplier?.name || "Amazon";
   };
 
   return (
@@ -84,9 +107,12 @@ const CouponCard = ({
               
               <Button
                 onClick={handleMarketplaceClick}
-                className="w-full bg-gradient-to-r from-[#232F3E] to-[#FF9900] hover:opacity-90 text-white"
+                style={{ 
+                  background: `linear-gradient(to right, #232F3E, ${getMarketplaceColor()})`
+                }}
+                className="w-full hover:opacity-90 text-white"
               >
-                View on {marketplace === 'amazon' ? 'Amazon' : 'AliExpress'}
+                View on {getMarketplaceName()}
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
             </div>

@@ -9,6 +9,24 @@ import { Button } from "@/components/ui/button";
 
 const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
 
+// Define suppliers array for easy extension
+const SUPPLIERS = [
+  {
+    id: "amazon",
+    name: "Amazon",
+    primaryColor: "#FF9900",
+    baseUrl: "https://www.amazon.com"
+  },
+  {
+    id: "aliexpress",
+    name: "AliExpress",
+    primaryColor: "#ff4747",
+    baseUrl: "https://www.aliexpress.com"
+  }
+] as const;
+
+type MarketplaceType = typeof SUPPLIERS[number]['id'];
+
 const SAMPLE_COUPONS = [
   {
     id: 1,
@@ -19,7 +37,7 @@ const SAMPLE_COUPONS = [
     category: "Fashion",
     productImage: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80",
     amazonLink: "https://www.amazon.com/deals",
-    marketplace: "amazon" as const
+    marketplace: "amazon" as MarketplaceType
   },
   {
     id: 2,
@@ -30,7 +48,7 @@ const SAMPLE_COUPONS = [
     category: "Electronics",
     productImage: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/deals",
-    marketplace: "aliexpress" as const
+    marketplace: "aliexpress" as MarketplaceType
   },
   {
     id: 3,
@@ -41,7 +59,7 @@ const SAMPLE_COUPONS = [
     category: "Books",
     productImage: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/books",
-    marketplace: "aliexpress" as const
+    marketplace: "aliexpress" as MarketplaceType
   },
   {
     id: 4,
@@ -52,7 +70,7 @@ const SAMPLE_COUPONS = [
     category: "Home",
     productImage: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/home",
-    marketplace: "aliexpress" as const
+    marketplace: "aliexpress" as MarketplaceType
   },
   {
     id: 5,
@@ -63,7 +81,7 @@ const SAMPLE_COUPONS = [
     category: "Beauty",
     productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
     amazonLink: "https://www.amazon.com/beauty",
-    marketplace: "amazon" as const
+    marketplace: "amazon" as MarketplaceType
   }
 ];
 
@@ -97,7 +115,7 @@ const Index = () => {
           </p>
 
           {/* Social Media Buttons */}
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             <Button
               variant="outline"
               className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none"
@@ -124,7 +142,7 @@ const Index = () => {
 
           <div className="flex flex-col items-center gap-6">
             {/* Marketplace Toggle */}
-            <div className="bg-white/10 p-1 rounded-lg">
+            <div className="bg-white/10 p-1 rounded-lg w-full max-w-md overflow-x-auto">
               <ToggleGroup 
                 type="single" 
                 value={selectedMarketplace}
@@ -132,26 +150,23 @@ const Index = () => {
                   if (value) setSelectedMarketplace(value);
                   if (!value) setSelectedMarketplace("all");
                 }}
-                className="flex gap-1"
+                className="flex gap-1 min-w-fit"
               >
                 <ToggleGroupItem 
                   value="all" 
-                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white"
+                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white whitespace-nowrap"
                 >
                   All
                 </ToggleGroupItem>
-                <ToggleGroupItem 
-                  value="amazon" 
-                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white"
-                >
-                  Amazon
-                </ToggleGroupItem>
-                <ToggleGroupItem 
-                  value="aliexpress" 
-                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white"
-                >
-                  AliExpress
-                </ToggleGroupItem>
+                {SUPPLIERS.map((supplier) => (
+                  <ToggleGroupItem 
+                    key={supplier.id}
+                    value={supplier.id} 
+                    className={`px-4 py-2 rounded-md data-[state=on]:bg-[${supplier.primaryColor}] data-[state=on]:text-white text-white whitespace-nowrap`}
+                  >
+                    {supplier.name}
+                  </ToggleGroupItem>
+                ))}
               </ToggleGroup>
             </div>
 
