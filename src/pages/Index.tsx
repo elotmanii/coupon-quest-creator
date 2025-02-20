@@ -114,11 +114,12 @@ const Index = () => {
             Descubre los mejores cupones y ahorra en tu próxima compra
           </p>
 
-          {/* Social Media Buttons */}
+          {/* Social Media Buttons - Responsive Design */}
           <div className="flex flex-wrap gap-4 justify-center">
+            {/* Telegram Button/Icon */}
             <Button
               variant="outline"
-              className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none"
+              className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none md:flex hidden"
               onClick={() => window.open('https://t.me/your-group', '_blank')}
             >
               <Send className="mr-2 h-4 w-4" />
@@ -126,11 +127,29 @@ const Index = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-[#1877F2] text-white hover:bg-[#1877F2]/90 border-none"
+              size="icon"
+              className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none md:hidden flex animate-bounce hover:animate-none"
+              onClick={() => window.open('https://t.me/your-group', '_blank')}
+            >
+              <Send className="h-5 w-5" />
+            </Button>
+
+            {/* Facebook Button/Icon */}
+            <Button
+              variant="outline"
+              className="bg-[#1877F2] text-white hover:bg-[#1877F2]/90 border-none md:flex hidden"
               onClick={() => window.open('https://facebook.com/groups/your-group', '_blank')}
             >
               <Facebook className="mr-2 h-4 w-4" />
               Unirse a Facebook
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="bg-[#1877F2] text-white hover:bg-[#1877F2]/90 border-none md:hidden flex animate-bounce hover:animate-none"
+              onClick={() => window.open('https://facebook.com/groups/your-group', '_blank')}
+            >
+              <Facebook className="h-5 w-5" />
             </Button>
           </div>
         </div>
