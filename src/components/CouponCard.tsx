@@ -41,6 +41,7 @@ const CouponCard = ({
   marketplace = "amazon"
 }: CouponCardProps) => {
   const [isFavorited, setIsFavorited] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const toggleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -63,6 +64,10 @@ const CouponCard = ({
     return supplier?.name || "Amazon";
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <div 
       className="group relative overflow-hidden rounded-xl bg-white/10 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 backdrop-blur-sm border border-white/10"
@@ -71,12 +76,16 @@ const CouponCard = ({
       
       <div className="relative">
         <div className="flex flex-col gap-6">
-          <div className="w-full h-48 rounded-lg overflow-hidden">
+          {/* Image Container with improved sizing and fallback */}
+          <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden bg-gray-100">
             <img 
-              src={productImage} 
-              alt="Product" 
+              src={imageError ? "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" : productImage}
+              alt={description}
+              onError={handleImageError}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading="lazy"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
           
           <div className="flex-1">
