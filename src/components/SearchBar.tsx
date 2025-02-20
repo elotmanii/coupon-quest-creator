@@ -1,3 +1,4 @@
+
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -12,7 +13,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <Input
           className="w-full pl-10 bg-white/10 border-white/10 backdrop-blur-sm text-white placeholder:text-gray-400"
-          placeholder="Search for coupons..."
+          placeholder="Buscar cupones..."
           onChange={(e) => onSearch(e.target.value)}
         />
       </div>

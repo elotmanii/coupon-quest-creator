@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,7 +45,7 @@ const CouponCard = ({
   const toggleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsFavorited(!isFavorited);
-    toast.success(isFavorited ? "Removed from favorites" : "Added to favorites");
+    toast.success(isFavorited ? "Eliminado de favoritos" : "Añadido a favoritos");
   };
 
   const handleMarketplaceClick = (e: React.MouseEvent) => {
@@ -76,7 +75,6 @@ const CouponCard = ({
       
       <div className="relative">
         <div className="flex flex-col gap-6">
-          {/* Image Container with improved sizing and fallback */}
           <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden bg-gray-100">
             <img 
               src={imageError ? "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" : productImage}
@@ -111,7 +109,7 @@ const CouponCard = ({
             
             <div className="flex flex-col gap-4">
               <div className="flex items-center text-sm text-gray-400">
-                <span>Expires: {expiryDate}</span>
+                <span>Expira: {expiryDate}</span>
               </div>
               
               <Button
@@ -121,7 +119,7 @@ const CouponCard = ({
                 }}
                 className="w-full hover:opacity-90 text-white"
               >
-                View on {getMarketplaceName()}
+                Ver en {getMarketplaceName()}
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
             </div>

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 
 interface CategoryFilterProps {
@@ -18,7 +19,7 @@ const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }: Cate
             : "text-white hover:bg-white/10"
         }`}
       >
-        All
+        Todos
       </Button>
       {categories.map((category) => (
         <Button

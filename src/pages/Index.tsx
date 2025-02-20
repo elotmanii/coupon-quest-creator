@@ -7,7 +7,7 @@ import { ShoppingCart, Facebook, Send } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Button } from "@/components/ui/button";
 
-const CATEGORIES = ["Electronics", "Fashion", "Books", "Home", "Beauty"];
+const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 
 // Define suppliers array for easy extension
 const SUPPLIERS = [
@@ -30,11 +30,11 @@ type MarketplaceType = typeof SUPPLIERS[number]['id'];
 const SAMPLE_COUPONS = [
   {
     id: 1,
-    code: "SUMMER2024",
-    discount: "25% OFF",
-    description: "Get 25% off on all summer essentials",
-    expiryDate: "2024-08-31",
-    category: "Fashion",
+    code: "VERANO2024",
+    discount: "25% DESCUENTO",
+    description: "Obtén 25% de descuento en todos los artículos de verano",
+    expiryDate: "31/08/2024",
+    category: "Moda",
     productImage: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80",
     amazonLink: "https://www.amazon.com/deals",
     marketplace: "amazon" as MarketplaceType
@@ -42,43 +42,43 @@ const SAMPLE_COUPONS = [
   {
     id: 2,
     code: "TECH2024",
-    discount: "₹1500 OFF",
-    description: "Save ₹1500 on electronics",
-    expiryDate: "2024-07-15",
-    category: "Electronics",
+    discount: "₹1500 DESCUENTO",
+    description: "Ahorra ₹1500 en electrónica",
+    expiryDate: "15/07/2024",
+    category: "Electrónica",
     productImage: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/deals",
     marketplace: "aliexpress" as MarketplaceType
   },
   {
     id: 3,
-    code: "ALIBOOKS15",
-    discount: "15% Off",
-    description: "Save on bestselling Books across all genres on AliExpress",
-    expiryDate: "2024-04-30",
-    category: "Books",
+    code: "LIBROS15",
+    discount: "15% Descuento",
+    description: "Ahorra en los libros más vendidos de todos los géneros en AliExpress",
+    expiryDate: "30/04/2024",
+    category: "Libros",
     productImage: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/books",
     marketplace: "aliexpress" as MarketplaceType
   },
   {
     id: 4,
-    code: "ALIHOME25",
-    discount: "25% Off",
-    description: "Discount on premium Home items from AliExpress",
-    expiryDate: "2024-05-15",
-    category: "Home",
+    code: "HOGAR25",
+    discount: "25% Descuento",
+    description: "Descuento en artículos premium para el hogar de AliExpress",
+    expiryDate: "15/05/2024",
+    category: "Hogar",
     productImage: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/home",
     marketplace: "aliexpress" as MarketplaceType
   },
   {
     id: 5,
-    code: "BEAUTY40",
-    discount: "40% Off",
-    description: "Save big on luxury Beauty products including skincare, makeup, and fragrances",
-    expiryDate: "2024-04-20",
-    category: "Beauty",
+    code: "BELLEZA40",
+    discount: "40% Descuento",
+    description: "Ahorra en productos de belleza de lujo, incluyendo skincare, maquillaje y fragancias",
+    expiryDate: "20/04/2024",
+    category: "Belleza",
     productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
     amazonLink: "https://www.amazon.com/beauty",
     marketplace: "amazon" as MarketplaceType
@@ -105,13 +105,13 @@ const Index = () => {
         <div className="flex flex-col items-center mb-12 text-center">
           <div className="flex items-center gap-2 text-[#FF9900] mb-6">
             <ShoppingCart className="h-8 w-8" />
-            <span className="text-2xl font-bold">CouponQuest</span>
+            <span className="text-2xl font-bold">CuponQuest</span>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-4">
-            Amazing Deals
+            Ofertas Increíbles
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-            Discover the best coupons and save on your next purchase
+            Descubre los mejores cupones y ahorra en tu próxima compra
           </p>
 
           {/* Social Media Buttons */}
@@ -122,7 +122,7 @@ const Index = () => {
               onClick={() => window.open('https://t.me/your-group', '_blank')}
             >
               <Send className="mr-2 h-4 w-4" />
-              Join Telegram
+              Unirse a Telegram
             </Button>
             <Button
               variant="outline"
@@ -130,7 +130,7 @@ const Index = () => {
               onClick={() => window.open('https://facebook.com/groups/your-group', '_blank')}
             >
               <Facebook className="mr-2 h-4 w-4" />
-              Join Facebook Group
+              Unirse a Facebook
             </Button>
           </div>
         </div>
@@ -156,7 +156,7 @@ const Index = () => {
                   value="all" 
                   className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white whitespace-nowrap"
                 >
-                  All
+                  Todos
                 </ToggleGroupItem>
                 {SUPPLIERS.map((supplier) => (
                   <ToggleGroupItem 
