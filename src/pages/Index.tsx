@@ -173,7 +173,7 @@ const Index = () => {
               >
                 <ToggleGroupItem 
                   value="all" 
-                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white whitespace-nowrap"
+                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white whitespace-nowrap transition-all duration-200 hover:bg-white/10"
                 >
                   Todos
                 </ToggleGroupItem>
@@ -181,9 +181,19 @@ const Index = () => {
                   <ToggleGroupItem 
                     key={supplier.id}
                     value={supplier.id} 
-                    className={`px-4 py-2 rounded-md data-[state=on]:bg-[${supplier.primaryColor}] data-[state=on]:text-white text-white whitespace-nowrap`}
+                    className={`px-4 py-2 rounded-md text-white whitespace-nowrap transition-all duration-200
+                      hover:bg-white/10
+                      data-[state=on]:shadow-lg
+                      data-[state=on]:scale-105
+                      ${supplier.id === 'amazon' ? 
+                        'data-[state=on]:bg-[#FF9900]' : 
+                        'data-[state=on]:bg-[#ff4747]'
+                      }
+                    `}
                   >
-                    {supplier.name}
+                    <span className="flex items-center gap-2">
+                      {supplier.name}
+                    </span>
                   </ToggleGroupItem>
                 ))}
               </ToggleGroup>
