@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
@@ -161,7 +160,7 @@ const Index = () => {
 
           <div className="flex flex-col items-center gap-6">
             {/* Marketplace Toggle */}
-            <div className="bg-white/10 p-1 rounded-lg w-full max-w-md overflow-x-auto">
+            <div className="bg-[#2D3541] p-2 rounded-lg w-full max-w-md">
               <ToggleGroup 
                 type="single" 
                 value={selectedMarketplace}
@@ -169,11 +168,13 @@ const Index = () => {
                   if (value) setSelectedMarketplace(value);
                   if (!value) setSelectedMarketplace("all");
                 }}
-                className="flex gap-1 min-w-fit"
+                className="relative flex w-full bg-[#2D3541] rounded-md"
               >
                 <ToggleGroupItem 
                   value="all" 
-                  className="px-4 py-2 rounded-md data-[state=on]:bg-[#FF9900] data-[state=on]:text-white text-white whitespace-nowrap transition-all duration-200 hover:bg-white/10"
+                  className="flex-1 px-4 py-2.5 text-sm font-medium rounded-md text-white relative z-10 transition-colors duration-200
+                    data-[state=on]:text-[#232F3E]
+                    data-[state=on]:bg-[#FF9900]"
                 >
                   Todos
                 </ToggleGroupItem>
@@ -181,19 +182,11 @@ const Index = () => {
                   <ToggleGroupItem 
                     key={supplier.id}
                     value={supplier.id} 
-                    className={`px-4 py-2 rounded-md text-white whitespace-nowrap transition-all duration-200
-                      hover:bg-white/10
-                      data-[state=on]:shadow-lg
-                      data-[state=on]:scale-105
-                      ${supplier.id === 'amazon' ? 
-                        'data-[state=on]:bg-[#FF9900]' : 
-                        'data-[state=on]:bg-[#ff4747]'
-                      }
-                    `}
+                    className="flex-1 px-4 py-2.5 text-sm font-medium rounded-md text-white relative z-10 transition-colors duration-200
+                      data-[state=on]:text-[#232F3E]
+                      data-[state=on]:bg-[#FF9900]"
                   >
-                    <span className="flex items-center gap-2">
-                      {supplier.name}
-                    </span>
+                    {supplier.name}
                   </ToggleGroupItem>
                 ))}
               </ToggleGroup>
