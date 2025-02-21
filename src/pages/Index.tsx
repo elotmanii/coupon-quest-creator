@@ -1,9 +1,8 @@
-
 import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
-import { ShoppingCart, Facebook, Send } from "lucide-react";
+import { ShoppingCart, Facebook, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -89,6 +88,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedMarketplace, setSelectedMarketplace] = useState("all");
+  const [showAdBanner, setShowAdBanner] = useState(true);
 
   const filteredCoupons = SAMPLE_COUPONS.filter((coupon) => {
     const matchesSearch = coupon.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -114,7 +114,7 @@ const Index = () => {
             Descubre los mejores cupones y ahorra en tu próxima compra
           </p>
 
-          {/* Social Media Buttons - Responsive Design */}
+          {/* Social Media Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
             {/* Telegram Button/Icon */}
             <Button
@@ -153,6 +153,25 @@ const Index = () => {
             </Button>
           </div>
         </div>
+
+        {/* Ad Banner */}
+        {showAdBanner && (
+          <div className="relative mb-8 bg-[#F97316] rounded-lg p-4 text-white animate-fade-in">
+            <div className="flex items-center justify-between">
+              <div className="flex-1 text-center">
+                <p className="font-semibold">¡Oferta Especial! 🎉</p>
+                <p className="text-sm mt-1">Obtén un 20% extra en tu primera compra</p>
+              </div>
+              <button
+                onClick={() => setShowAdBanner(false)}
+                className="absolute right-2 top-2 p-1 hover:bg-black/20 rounded-full transition-colors"
+                aria-label="Cerrar banner"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Filters Section */}
         <div className="max-w-4xl mx-auto mb-12 space-y-8">
