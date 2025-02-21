@@ -1,10 +1,11 @@
 import { useState } from "react";
-import CouponCard from "@/components/CouponCard";
+import Header from "@/components/Header";
+import AdBanner from "@/components/AdBanner";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
-import { ShoppingCart, Facebook, Send, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import MarketplaceFilter from "@/components/MarketplaceFilter";
+import CouponGrid from "@/components/CouponGrid";
+import type { MarketplaceType } from "@/types";
 
 const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 
@@ -23,8 +24,6 @@ const SUPPLIERS = [
     baseUrl: "https://www.aliexpress.com"
   }
 ] as const;
-
-type MarketplaceType = typeof SUPPLIERS[number]['id'];
 
 const SAMPLE_COUPONS = [
   {
@@ -101,123 +100,22 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
       <div className="max-w-6xl mx-auto">
-        {/* Header Section */}
-        <div className="flex flex-col items-center mb-12 text-center">
-          <div className="flex items-center gap-2 text-[#FF9900] mb-6">
-            <ShoppingCart className="h-8 w-8" />
-            <span className="text-2xl font-bold">CuponQuest</span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-4">
-            Ofertas Increíbles
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-            Descubre los mejores cupones y ahorra en tu próxima compra
-          </p>
+        <Header />
 
-          {/* Social Media Buttons */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            {/* Telegram Button/Icon */}
-            <Button
-              variant="outline"
-              className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none md:flex hidden"
-              onClick={() => window.open('https://t.me/your-group', '_blank')}
-            >
-              <Send className="mr-2 h-4 w-4" />
-              Unirse a Telegram
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="bg-[#0088cc] text-white hover:bg-[#0088cc]/90 border-none md:hidden flex animate-bounce hover:animate-none"
-              onClick={() => window.open('https://t.me/your-group', '_blank')}
-            >
-              <Send className="h-5 w-5" />
-            </Button>
-
-            {/* Facebook Button/Icon */}
-            <Button
-              variant="outline"
-              className="bg-[#1877F2] text-white hover:bg-[#1877F2]/90 border-none md:flex hidden"
-              onClick={() => window.open('https://facebook.com/groups/your-group', '_blank')}
-            >
-              <Facebook className="mr-2 h-4 w-4" />
-              Unirse a Facebook
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="bg-[#1877F2] text-white hover:bg-[#1877F2]/90 border-none md:hidden flex animate-bounce hover:animate-none"
-              onClick={() => window.open('https://facebook.com/groups/your-group', '_blank')}
-            >
-              <Facebook className="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Ad Banner */}
         {showAdBanner && (
-          <div className="relative mb-8 bg-[#F97316] rounded-lg p-4 text-white animate-fade-in">
-            <div className="flex items-center justify-between">
-              <div className="flex-1 text-center">
-                <p className="font-semibold">¡Oferta Especial! 🎉</p>
-                <p className="text-sm mt-1">Obtén un 20% extra en tu primera compra</p>
-              </div>
-              <button
-                onClick={() => setShowAdBanner(false)}
-                className="absolute right-2 top-2 p-1 hover:bg-black/20 rounded-full transition-colors"
-                aria-label="Cerrar banner"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
+          <AdBanner onClose={() => setShowAdBanner(false)} />
         )}
 
-        {/* Filters Section */}
         <div className="max-w-4xl mx-auto mb-12 space-y-8">
-          {/* Search Bar */}
           <SearchBar onSearch={setSearchQuery} />
 
           <div className="flex flex-col items-center gap-6">
-            {/* Marketplace Radio Group */}
-            <div className="bg-[#2D3541] p-4 rounded-lg w-full max-w-md">
-              <RadioGroup
-                value={selectedMarketplace}
-                onValueChange={setSelectedMarketplace}
-                className="flex flex-wrap gap-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem 
-                    value="all" 
-                    id="all"
-                    className="text-[#FF9900] border-white/50 data-[state=checked]:border-[#FF9900] data-[state=checked]:text-[#FF9900]"
-                  />
-                  <label 
-                    htmlFor="all" 
-                    className="text-sm font-medium leading-none text-white cursor-pointer"
-                  >
-                    Todos
-                  </label>
-                </div>
-                {SUPPLIERS.map((supplier) => (
-                  <div key={supplier.id} className="flex items-center space-x-2">
-                    <RadioGroupItem 
-                      value={supplier.id} 
-                      id={supplier.id}
-                      className="text-[#FF9900] border-white/50 data-[state=checked]:border-[#FF9900] data-[state=checked]:text-[#FF9900]"
-                    />
-                    <label 
-                      htmlFor={supplier.id} 
-                      className="text-sm font-medium leading-none text-white cursor-pointer"
-                    >
-                      {supplier.name}
-                    </label>
-                  </div>
-                ))}
-              </RadioGroup>
-            </div>
+            <MarketplaceFilter
+              selectedMarketplace={selectedMarketplace}
+              onMarketplaceChange={setSelectedMarketplace}
+              suppliers={SUPPLIERS}
+            />
 
-            {/* Category Filter */}
             <CategoryFilter
               categories={CATEGORIES}
               selectedCategory={selectedCategory}
@@ -226,21 +124,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Coupons Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCoupons.map((coupon) => (
-            <CouponCard
-              key={coupon.id}
-              discount={coupon.discount}
-              description={coupon.description}
-              expiryDate={coupon.expiryDate}
-              category={coupon.category}
-              productImage={coupon.productImage}
-              amazonLink={coupon.amazonLink}
-              marketplace={coupon.marketplace}
-            />
-          ))}
-        </div>
+        <CouponGrid coupons={filteredCoupons} />
       </div>
     </div>
   );
