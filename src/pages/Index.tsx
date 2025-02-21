@@ -1,10 +1,11 @@
+
 import { useState } from "react";
 import CouponCard from "@/components/CouponCard";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import { ShoppingCart, Facebook, Send } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 
@@ -159,37 +160,42 @@ const Index = () => {
           <SearchBar onSearch={setSearchQuery} />
 
           <div className="flex flex-col items-center gap-6">
-            {/* Marketplace Toggle */}
-            <div className="bg-[#2D3541] p-2 rounded-lg w-full max-w-md">
-              <ToggleGroup 
-                type="single" 
+            {/* Marketplace Radio Group */}
+            <div className="bg-[#2D3541] p-4 rounded-lg w-full max-w-md">
+              <RadioGroup
                 value={selectedMarketplace}
-                onValueChange={(value) => {
-                  if (value) setSelectedMarketplace(value);
-                  if (!value) setSelectedMarketplace("all");
-                }}
-                className="relative flex w-full bg-[#2D3541] rounded-md"
+                onValueChange={setSelectedMarketplace}
+                className="flex flex-wrap gap-4"
               >
-                <ToggleGroupItem 
-                  value="all" 
-                  className="flex-1 px-4 py-2.5 text-sm font-medium rounded-md text-white relative z-10 transition-colors duration-200
-                    data-[state=on]:text-[#232F3E]
-                    data-[state=on]:bg-[#FF9900]"
-                >
-                  Todos
-                </ToggleGroupItem>
-                {SUPPLIERS.map((supplier) => (
-                  <ToggleGroupItem 
-                    key={supplier.id}
-                    value={supplier.id} 
-                    className="flex-1 px-4 py-2.5 text-sm font-medium rounded-md text-white relative z-10 transition-colors duration-200
-                      data-[state=on]:text-[#232F3E]
-                      data-[state=on]:bg-[#FF9900]"
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem 
+                    value="all" 
+                    id="all"
+                    className="text-[#FF9900] border-white/50 data-[state=checked]:border-[#FF9900] data-[state=checked]:text-[#FF9900]"
+                  />
+                  <label 
+                    htmlFor="all" 
+                    className="text-sm font-medium leading-none text-white cursor-pointer"
                   >
-                    {supplier.name}
-                  </ToggleGroupItem>
+                    Todos
+                  </label>
+                </div>
+                {SUPPLIERS.map((supplier) => (
+                  <div key={supplier.id} className="flex items-center space-x-2">
+                    <RadioGroupItem 
+                      value={supplier.id} 
+                      id={supplier.id}
+                      className="text-[#FF9900] border-white/50 data-[state=checked]:border-[#FF9900] data-[state=checked]:text-[#FF9900]"
+                    />
+                    <label 
+                      htmlFor={supplier.id} 
+                      className="text-sm font-medium leading-none text-white cursor-pointer"
+                    >
+                      {supplier.name}
+                    </label>
+                  </div>
                 ))}
-              </ToggleGroup>
+              </RadioGroup>
             </div>
 
             {/* Category Filter */}
