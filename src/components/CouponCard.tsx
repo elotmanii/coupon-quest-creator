@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import type { MarketplaceType } from "@/types";
 
 const SUPPLIERS = [
   {
@@ -17,8 +19,6 @@ const SUPPLIERS = [
     baseUrl: "https://www.aliexpress.com"
   }
 ] as const;
-
-type MarketplaceType = typeof SUPPLIERS[number]['id'];
 
 interface CouponCardProps {
   discount: string;
@@ -67,6 +67,15 @@ const CouponCard = ({
     setImageError(true);
   };
 
+  // Function to optimize image URL for better performance
+  const getOptimizedImageUrl = (url: string) => {
+    // If it's an Unsplash image, we can use their optimization parameters
+    if (url.includes('unsplash.com')) {
+      return `${url}?w=400&h=400&fit=crop&q=80`;
+    }
+    return url;
+  };
+
   return (
     <div 
       className="group relative overflow-hidden rounded-xl bg-white/10 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 backdrop-blur-sm border border-white/10"
@@ -75,13 +84,16 @@ const CouponCard = ({
       
       <div className="relative">
         <div className="flex flex-col gap-6">
+          {/* Image Container with fixed aspect ratio */}
           <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden bg-gray-100">
             <img 
-              src={imageError ? "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" : productImage}
+              src={imageError ? getOptimizedImageUrl("https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80") : getOptimizedImageUrl(productImage)}
               alt={description}
               onError={handleImageError}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               loading="lazy"
+              width={400}
+              height={400}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
