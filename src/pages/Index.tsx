@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
@@ -31,7 +30,6 @@ const ALL_SUPPLIERS: Supplier[] = [
   }
 ];
 
-// Example of how to enable/disable suppliers
 const ENABLED_SUPPLIER_IDS = ["amazon", "aliexpress", "ebay"] as const;
 const SUPPLIERS = ALL_SUPPLIERS.filter(supplier => 
   ENABLED_SUPPLIER_IDS.includes(supplier.id as typeof ENABLED_SUPPLIER_IDS[number])
@@ -43,66 +41,72 @@ const SAMPLE_COUPONS = [
     code: "VERANO2024",
     discount: "25% DESCUENTO",
     description: "Obtén 25% de descuento en todos los artículos de verano",
-    expiryDate: "31/08/2024",
     category: "Moda",
     productImage: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80",
     amazonLink: "https://www.amazon.com/deals",
-    marketplace: "amazon" as MarketplaceType
+    marketplace: "amazon" as MarketplaceType,
+    beforePrice: 2999,
+    afterPrice: 2249
   },
   {
     id: 2,
     code: "TECH2024",
     discount: "₹1500 DESCUENTO",
     description: "Ahorra ₹1500 en electrónica",
-    expiryDate: "15/07/2024",
     category: "Electrónica",
     productImage: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/deals",
-    marketplace: "aliexpress" as MarketplaceType
+    marketplace: "aliexpress" as MarketplaceType,
+    beforePrice: 4999,
+    afterPrice: 3499
   },
   {
     id: 3,
     code: "LIBROS15",
     discount: "15% Descuento",
     description: "Ahorra en los libros más vendidos de todos los géneros en AliExpress",
-    expiryDate: "30/04/2024",
     category: "Libros",
     productImage: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/books",
-    marketplace: "aliexpress" as MarketplaceType
+    marketplace: "aliexpress" as MarketplaceType,
+    beforePrice: 999,
+    afterPrice: 849
   },
   {
     id: 4,
     code: "HOGAR25",
     discount: "25% Descuento",
     description: "Descuento en artículos premium para el hogar de AliExpress",
-    expiryDate: "15/05/2024",
     category: "Hogar",
     productImage: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/home",
-    marketplace: "aliexpress" as MarketplaceType
+    marketplace: "aliexpress" as MarketplaceType,
+    beforePrice: 3999,
+    afterPrice: 2999
   },
   {
     id: 5,
     code: "BELLEZA40",
     discount: "40% Descuento",
     description: "Ahorra en productos de belleza de lujo, incluyendo skincare, maquillaje y fragancias",
-    expiryDate: "20/04/2024",
     category: "Belleza",
     productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
     amazonLink: "https://www.amazon.com/beauty",
-    marketplace: "amazon" as MarketplaceType
+    marketplace: "amazon" as MarketplaceType,
+    beforePrice: 5999,
+    afterPrice: 3599
   },
   {
     id: 6,
     code: "EBAY2024",
     discount: "30% DESCUENTO",
     description: "Gran descuento en productos seleccionados de eBay",
-    expiryDate: "31/12/2024",
     category: "Electrónica",
     productImage: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
     amazonLink: "https://www.ebay.com/deals",
-    marketplace: "ebay" as MarketplaceType
+    marketplace: "ebay" as MarketplaceType,
+    beforePrice: 7999,
+    afterPrice: 5599
   }
 ];
 
@@ -118,7 +122,6 @@ const Index = () => {
     const matchesCategory = selectedCategory === "all" || coupon.category === selectedCategory;
     const matchesMarketplace = selectedMarketplace === "all" || coupon.marketplace === selectedMarketplace;
     
-    // Only show coupons from enabled suppliers
     const isSupplierEnabled = SUPPLIERS.some(supplier => supplier.id === coupon.marketplace);
     
     return matchesSearch && matchesCategory && matchesMarketplace && isSupplierEnabled;

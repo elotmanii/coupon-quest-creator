@@ -17,27 +17,35 @@ const SUPPLIERS = [
     name: "AliExpress",
     primaryColor: "#ff4747",
     baseUrl: "https://www.aliexpress.com"
+  },
+  {
+    id: "ebay",
+    name: "eBay",
+    primaryColor: "#0063D1",
+    baseUrl: "https://www.ebay.com"
   }
 ] as const;
 
 interface CouponCardProps {
   discount: string;
   description: string;
-  expiryDate: string;
   category: string;
   productImage?: string;
   amazonLink?: string;
   marketplace?: MarketplaceType;
+  beforePrice?: number;
+  afterPrice?: number;
 }
 
 const CouponCard = ({ 
   discount, 
   description, 
-  expiryDate, 
   category,
   productImage = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
   amazonLink = "https://www.amazon.com",
-  marketplace = "amazon"
+  marketplace = "amazon",
+  beforePrice,
+  afterPrice
 }: CouponCardProps) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -67,9 +75,16 @@ const CouponCard = ({
     setImageError(true);
   };
 
+  const calculateDiscount = () => {
+    if (beforePrice && afterPrice) {
+      const discount = ((beforePrice - afterPrice) / beforePrice) * 100;
+      return Math.round(discount);
+    }
+    return null;
+  };
+
   // Function to optimize image URL for better performance
   const getOptimizedImageUrl = (url: string) => {
-    // If it's an Unsplash image, we can use their optimization parameters
     if (url.includes('unsplash.com')) {
       return `${url}?w=400&h=400&fit=crop&q=80`;
     }
@@ -120,9 +135,18 @@ const CouponCard = ({
             <p className="text-sm text-gray-300 mb-4">{description}</p>
             
             <div className="flex flex-col gap-4">
-              <div className="flex items-center text-sm text-gray-400">
-                <span>Expira: {expiryDate}</span>
-              </div>
+              {/* Price Information */}
+              {beforePrice && afterPrice && (
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-400 line-through">₹{beforePrice}</span>
+                    <span className="text-white font-semibold">₹{afterPrice}</span>
+                  </div>
+                  <span className="text-green-500 font-semibold">
+                    {calculateDiscount()}% OFF
+                  </span>
+                </div>
+              )}
               
               <Button
                 onClick={handleMarketplaceClick}
