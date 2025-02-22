@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
@@ -9,7 +10,6 @@ import type { MarketplaceType } from "@/types";
 
 const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 
-// Define suppliers array for easy extension
 const SUPPLIERS = [
   {
     id: "amazon" as const,
@@ -106,6 +106,7 @@ const Index = () => {
           <AdBanner 
             onClose={() => setShowAdBanner(false)}
             image="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80"
+            link="https://www.amazon.com/deals"
           />
         )}
 

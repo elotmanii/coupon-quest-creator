@@ -4,14 +4,27 @@ import { X } from "lucide-react";
 interface AdBannerProps {
   onClose: () => void;
   image?: string;
+  link?: string;
 }
 
 const AdBanner = ({ 
   onClose,
-  image = "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80" 
+  image = "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80",
+  link = "https://www.amazon.com"
 }: AdBannerProps) => {
+  const handleClick = (e: React.MouseEvent) => {
+    // Prevent click if the click was on the close button
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
+    }
+    window.open(link, '_blank');
+  };
+
   return (
-    <div className="relative mb-8 bg-[#F97316] rounded-lg overflow-hidden animate-fade-in">
+    <div 
+      onClick={handleClick}
+      className="relative mb-8 bg-[#F97316] rounded-lg overflow-hidden animate-fade-in cursor-pointer hover:opacity-95 transition-opacity"
+    >
       <div className="flex flex-col sm:flex-row items-center">
         {/* Image Container */}
         <div className="w-full sm:w-1/3 h-40 sm:h-auto relative">
