@@ -12,18 +12,18 @@ const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 // Define suppliers array for easy extension
 const SUPPLIERS = [
   {
-    id: "amazon",
+    id: "amazon" as const,
     name: "Amazon",
     primaryColor: "#FF9900",
     baseUrl: "https://www.amazon.com"
   },
   {
-    id: "aliexpress",
+    id: "aliexpress" as const,
     name: "AliExpress",
     primaryColor: "#ff4747",
     baseUrl: "https://www.aliexpress.com"
   }
-] as const;
+];
 
 const SAMPLE_COUPONS = [
   {
@@ -103,7 +103,10 @@ const Index = () => {
         <Header />
 
         {showAdBanner && (
-          <AdBanner onClose={() => setShowAdBanner(false)} />
+          <AdBanner 
+            onClose={() => setShowAdBanner(false)}
+            image="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80"
+          />
         )}
 
         <div className="max-w-4xl mx-auto mb-12 space-y-8">
