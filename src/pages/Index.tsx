@@ -6,24 +6,36 @@ import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import MarketplaceFilter from "@/components/MarketplaceFilter";
 import CouponGrid from "@/components/CouponGrid";
-import type { MarketplaceType } from "@/types";
+import type { MarketplaceType, Supplier } from "@/types";
 
 const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 
-const SUPPLIERS = [
+const ALL_SUPPLIERS: Supplier[] = [
   {
-    id: "amazon" as const,
+    id: "amazon",
     name: "Amazon",
     primaryColor: "#FF9900",
     baseUrl: "https://www.amazon.com"
   },
   {
-    id: "aliexpress" as const,
+    id: "aliexpress",
     name: "AliExpress",
     primaryColor: "#ff4747",
     baseUrl: "https://www.aliexpress.com"
+  },
+  {
+    id: "ebay",
+    name: "eBay",
+    primaryColor: "#0063D1",
+    baseUrl: "https://www.ebay.com"
   }
 ];
+
+// Example of how to enable/disable suppliers
+const ENABLED_SUPPLIER_IDS = ["amazon", "aliexpress", "ebay"] as const;
+const SUPPLIERS = ALL_SUPPLIERS.filter(supplier => 
+  ENABLED_SUPPLIER_IDS.includes(supplier.id as typeof ENABLED_SUPPLIER_IDS[number])
+);
 
 const SAMPLE_COUPONS = [
   {
@@ -80,6 +92,17 @@ const SAMPLE_COUPONS = [
     productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
     amazonLink: "https://www.amazon.com/beauty",
     marketplace: "amazon" as MarketplaceType
+  },
+  {
+    id: 6,
+    code: "EBAY2024",
+    discount: "30% DESCUENTO",
+    description: "Gran descuento en productos seleccionados de eBay",
+    expiryDate: "31/12/2024",
+    category: "Electrónica",
+    productImage: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
+    amazonLink: "https://www.ebay.com/deals",
+    marketplace: "ebay" as MarketplaceType
   }
 ];
 
@@ -94,7 +117,11 @@ const Index = () => {
                          coupon.code.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || coupon.category === selectedCategory;
     const matchesMarketplace = selectedMarketplace === "all" || coupon.marketplace === selectedMarketplace;
-    return matchesSearch && matchesCategory && matchesMarketplace;
+    
+    // Only show coupons from enabled suppliers
+    const isSupplierEnabled = SUPPLIERS.some(supplier => supplier.id === coupon.marketplace);
+    
+    return matchesSearch && matchesCategory && matchesMarketplace && isSupplierEnabled;
   });
 
   return (

@@ -1,5 +1,5 @@
 
-export type MarketplaceType = "amazon" | "aliexpress";
+export type MarketplaceType = "amazon" | "aliexpress" | "ebay";
 
 export interface Supplier {
   id: MarketplaceType;
@@ -7,3 +7,4 @@ export interface Supplier {
   primaryColor: string;
   baseUrl: string;
 }
+
