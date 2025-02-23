@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Heart, ExternalLink, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -50,6 +49,7 @@ const CouponCard = ({
   const [isFavorited, setIsFavorited] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const toggleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -101,12 +101,15 @@ const CouponCard = ({
     return null;
   };
 
-  // Function to optimize image URL for better performance
   const getOptimizedImageUrl = (url: string) => {
     if (url.includes('unsplash.com')) {
-      return `${url}?w=400&h=400&fit=crop&q=80`;
+      return `${url}?w=400&h=400&fit=cover&q=80`;
     }
     return url;
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
   };
 
   return (
@@ -119,20 +122,35 @@ const CouponCard = ({
       
       <div className="relative">
         <div className="flex flex-col gap-6">
-          {/* Image Container with zoom effect */}
-          <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden bg-gray-100 group">
-            <img 
-              src={imageError ? getOptimizedImageUrl("https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80") : getOptimizedImageUrl(productImage)}
-              alt={description}
-              onError={handleImageError}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              loading="lazy"
-              width={400}
-              height={400}
+          <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-100">
+            {!imageLoaded && (
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse" />
+            )}
+            
+            <div 
+              className="absolute inset-0 bg-center bg-cover blur-xl opacity-50 scale-110"
+              style={{
+                backgroundImage: `url(${imageError ? getOptimizedImageUrl("https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80") : getOptimizedImageUrl(productImage)})`,
+              }}
             />
+            
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+              <img 
+                src={imageError ? getOptimizedImageUrl("https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80") : getOptimizedImageUrl(productImage)}
+                alt={description}
+                onError={handleImageError}
+                onLoad={handleImageLoad}
+                className={`w-full h-full object-contain transition-all duration-500 ${
+                  imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                } group-hover:scale-110`}
+                loading="lazy"
+                width={400}
+                height={400}
+              />
+            </div>
+
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
-            {/* Quick action buttons */}
             <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <Button
                 variant="secondary"
