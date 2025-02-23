@@ -8,3 +8,15 @@ export interface Supplier {
   baseUrl: string;
 }
 
+export interface Coupon {
+  id: number;
+  code: string;
+  discount: string;
+  description: string;
+  category: string;
+  productImage: string;
+  amazonLink: string;
+  marketplace: MarketplaceType;
+  beforePrice?: number;
+  afterPrice?: number;
+}

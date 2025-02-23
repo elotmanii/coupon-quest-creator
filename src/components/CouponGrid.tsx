@@ -6,11 +6,12 @@ interface Coupon {
   id: number;
   discount: string;
   description: string;
-  expiryDate: string;
   category: string;
   productImage: string;
   amazonLink: string;
   marketplace: MarketplaceType;
+  beforePrice?: number;
+  afterPrice?: number;
 }
 
 interface CouponGridProps {
@@ -25,13 +26,20 @@ const CouponGrid = ({ coupons }: CouponGridProps) => {
           key={coupon.id}
           discount={coupon.discount}
           description={coupon.description}
-          expiryDate={coupon.expiryDate}
           category={coupon.category}
           productImage={coupon.productImage}
           amazonLink={coupon.amazonLink}
           marketplace={coupon.marketplace}
+          beforePrice={coupon.beforePrice}
+          afterPrice={coupon.afterPrice}
         />
       ))}
+      
+      {coupons.length === 0 && (
+        <div className="col-span-full text-center py-12">
+          <p className="text-gray-400 text-lg">No se encontraron cupones que coincidan con tu búsqueda.</p>
+        </div>
+      )}
     </div>
   );
 };
