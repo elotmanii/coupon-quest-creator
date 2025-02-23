@@ -160,16 +160,18 @@ const CouponCard = ({
               <Button
                 variant="secondary"
                 size="icon"
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30"
+                className="bg-[#0EA5E9]/20 backdrop-blur-sm hover:bg-[#0EA5E9]/30 text-white"
                 onClick={handleShare}
               >
-                <Share2 className="h-4 w-4 text-white" />
+                <Share2 className="h-4 w-4" />
               </Button>
               <Button
                 variant="secondary"
                 size="icon"
-                className={`bg-white/20 backdrop-blur-sm hover:bg-white/30 ${
-                  isFavorited ? "text-red-500" : "text-white"
+                className={`backdrop-blur-sm ${
+                  isFavorited 
+                    ? "bg-[#ea384c]/20 hover:bg-[#ea384c]/30 text-[#ea384c]" 
+                    : "bg-[#ea384c]/20 hover:bg-[#ea384c]/30 text-white"
                 }`}
                 onClick={toggleFavorite}
               >
