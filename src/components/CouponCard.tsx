@@ -89,6 +89,11 @@ const CouponCard = ({
     return supplier?.name || "Amazon";
   };
 
+  const getMarketplaceButtonText = () => {
+    const supplier = SUPPLIERS.find(s => s.id === marketplace);
+    return `Ver en ${supplier?.name || "Amazon"}`;
+  };
+
   const handleImageError = () => {
     setImageError(true);
   };
@@ -209,7 +214,7 @@ const CouponCard = ({
               }}
               className="w-full hover:opacity-90 text-white group"
             >
-              Ver Oferta
+              {getMarketplaceButtonText()}
               <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
