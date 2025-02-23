@@ -175,8 +175,8 @@ const CouponCard = ({
             {beforePrice && afterPrice && (
               <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/5">
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-400 line-through">₹{beforePrice}</span>
-                  <span className="text-white font-semibold">₹{afterPrice}</span>
+                  <span className="text-gray-400 line-through">€{beforePrice}</span>
+                  <span className="text-white font-semibold">€{afterPrice}</span>
                 </div>
                 <span className="text-green-500 font-semibold animate-pulse">
                   {calculateDiscount()}% OFF

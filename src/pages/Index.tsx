@@ -45,20 +45,20 @@ const SAMPLE_COUPONS = [
     productImage: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80",
     amazonLink: "https://www.amazon.com/deals",
     marketplace: "amazon" as MarketplaceType,
-    beforePrice: 2999,
-    afterPrice: 2249
+    beforePrice: 299,
+    afterPrice: 224
   },
   {
     id: 2,
     code: "TECH2024",
-    discount: "₹1500 DESCUENTO",
-    description: "Ahorra ₹1500 en electrónica",
+    discount: "€150 DESCUENTO",
+    description: "Ahorra €150 en electrónica",
     category: "Electrónica",
     productImage: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/deals",
     marketplace: "aliexpress" as MarketplaceType,
-    beforePrice: 4999,
-    afterPrice: 3499
+    beforePrice: 499,
+    afterPrice: 349
   },
   {
     id: 3,
@@ -69,8 +69,8 @@ const SAMPLE_COUPONS = [
     productImage: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/books",
     marketplace: "aliexpress" as MarketplaceType,
-    beforePrice: 999,
-    afterPrice: 849
+    beforePrice: 99,
+    afterPrice: 84
   },
   {
     id: 4,
@@ -81,8 +81,8 @@ const SAMPLE_COUPONS = [
     productImage: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
     amazonLink: "https://www.aliexpress.com/home",
     marketplace: "aliexpress" as MarketplaceType,
-    beforePrice: 3999,
-    afterPrice: 2999
+    beforePrice: 399,
+    afterPrice: 299
   },
   {
     id: 5,
@@ -93,8 +93,8 @@ const SAMPLE_COUPONS = [
     productImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80",
     amazonLink: "https://www.amazon.com/beauty",
     marketplace: "amazon" as MarketplaceType,
-    beforePrice: 5999,
-    afterPrice: 3599
+    beforePrice: 599,
+    afterPrice: 359
   },
   {
     id: 6,
@@ -105,8 +105,8 @@ const SAMPLE_COUPONS = [
     productImage: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
     amazonLink: "https://www.ebay.com/deals",
     marketplace: "ebay" as MarketplaceType,
-    beforePrice: 7999,
-    afterPrice: 5599
+    beforePrice: 799,
+    afterPrice: 559
   }
 ];
 
