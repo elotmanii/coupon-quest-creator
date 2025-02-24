@@ -154,7 +154,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto mb-12 space-y-8">
           <SearchBar onSearch={setSearchQuery} />
 
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-row items-center justify-center gap-4 flex-wrap md:flex-nowrap">
             <MarketplaceFilter
               selectedMarketplace={selectedMarketplace}
               onMarketplaceChange={setSelectedMarketplace}
