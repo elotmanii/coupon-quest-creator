@@ -1,5 +1,11 @@
 
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface MarketplaceFilterProps {
   selectedMarketplace: string;
@@ -12,41 +18,26 @@ interface MarketplaceFilterProps {
 
 const MarketplaceFilter = ({ selectedMarketplace, onMarketplaceChange, suppliers }: MarketplaceFilterProps) => {
   return (
-    <div className="bg-[#2D3541] p-4 rounded-lg w-full max-w-md">
-      <RadioGroup
-        value={selectedMarketplace}
-        onValueChange={onMarketplaceChange}
-        className="flex flex-wrap gap-4"
-      >
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem 
-            value="all" 
-            id="all"
-            className="text-[#FF9900] border-white/50 data-[state=checked]:border-[#FF9900] data-[state=checked]:text-[#FF9900]"
-          />
-          <label 
-            htmlFor="all" 
-            className="text-sm font-medium leading-none text-white cursor-pointer"
-          >
+    <div className="w-full max-w-md">
+      <Select value={selectedMarketplace} onValueChange={onMarketplaceChange}>
+        <SelectTrigger className="w-full bg-[#2D3541] text-white border-white/20 focus:ring-[#FF9900] focus:ring-opacity-50">
+          <SelectValue placeholder="Seleccionar Marketplace" />
+        </SelectTrigger>
+        <SelectContent className="bg-[#2D3541] text-white border-white/20">
+          <SelectItem value="all" className="focus:bg-[#FF9900]/20 focus:text-white">
             Todos
-          </label>
-        </div>
-        {suppliers.map((supplier) => (
-          <div key={supplier.id} className="flex items-center space-x-2">
-            <RadioGroupItem 
-              value={supplier.id} 
-              id={supplier.id}
-              className="text-[#FF9900] border-white/50 data-[state=checked]:border-[#FF9900] data-[state=checked]:text-[#FF9900]"
-            />
-            <label 
-              htmlFor={supplier.id} 
-              className="text-sm font-medium leading-none text-white cursor-pointer"
+          </SelectItem>
+          {suppliers.map((supplier) => (
+            <SelectItem 
+              key={supplier.id} 
+              value={supplier.id}
+              className="focus:bg-[#FF9900]/20 focus:text-white"
             >
               {supplier.name}
-            </label>
-          </div>
-        ))}
-      </RadioGroup>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 };
