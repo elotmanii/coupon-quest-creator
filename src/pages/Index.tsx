@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
 import SearchBar from "@/components/SearchBar";
@@ -114,7 +115,17 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedMarketplace, setSelectedMarketplace] = useState("all");
-  const [showAdBanner, setShowAdBanner] = useState(true);
+  const [showAdBanner, setShowAdBanner] = useState(false);
+
+  useEffect(() => {
+    // Set a timeout to show the banner after 5 seconds
+    const timer = setTimeout(() => {
+      setShowAdBanner(true);
+    }, 5000);
+
+    // Cleanup the timer if the component unmounts
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array means this runs once when component mounts
 
   const filteredCoupons = SAMPLE_COUPONS.filter((coupon) => {
     const matchesSearch = coupon.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
