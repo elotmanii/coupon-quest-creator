@@ -18,7 +18,7 @@ interface MarketplaceFilterProps {
 
 const MarketplaceFilter = ({ selectedMarketplace, onMarketplaceChange, suppliers }: MarketplaceFilterProps) => {
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-[200px]">
       <Select value={selectedMarketplace} onValueChange={onMarketplaceChange}>
         <SelectTrigger className="w-full bg-[#2D3541] text-white border-white/20 focus:ring-[#FF9900] focus:ring-opacity-50">
           <SelectValue placeholder="Seleccionar Marketplace" />
