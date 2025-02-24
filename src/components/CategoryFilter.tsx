@@ -9,7 +9,7 @@ interface CategoryFilterProps {
 
 const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }: CategoryFilterProps) => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 justify-center">
       <Button
         variant={selectedCategory === "all" ? "default" : "ghost"}
         onClick={() => onSelectCategory("all")}
