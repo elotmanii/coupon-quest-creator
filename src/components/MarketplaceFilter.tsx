@@ -1,12 +1,4 @@
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 interface MarketplaceFilterProps {
   selectedMarketplace: string;
   onMarketplaceChange: (value: string) => void;
@@ -18,26 +10,30 @@ interface MarketplaceFilterProps {
 
 const MarketplaceFilter = ({ selectedMarketplace, onMarketplaceChange, suppliers }: MarketplaceFilterProps) => {
   return (
-    <div className="w-full max-w-[200px]">
-      <Select value={selectedMarketplace} onValueChange={onMarketplaceChange}>
-        <SelectTrigger className="w-full bg-[#2D3541] text-white border-white/20 focus:ring-[#FF9900] focus:ring-opacity-50">
-          <SelectValue placeholder="Seleccionar Marketplace" />
-        </SelectTrigger>
-        <SelectContent className="bg-[#2D3541] text-white border-white/20">
-          <SelectItem value="all" className="focus:bg-[#FF9900]/20 focus:text-white">
-            Todos
-          </SelectItem>
-          {suppliers.map((supplier) => (
-            <SelectItem 
-              key={supplier.id} 
-              value={supplier.id}
-              className="focus:bg-[#FF9900]/20 focus:text-white"
-            >
-              {supplier.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="flex flex-wrap gap-2 justify-center">
+      <button
+        onClick={() => onMarketplaceChange("all")}
+        className={`px-4 py-2 rounded-full transition-colors ${
+          selectedMarketplace === "all"
+            ? "bg-[#FF9900] text-white"
+            : "text-white hover:bg-white/10"
+        }`}
+      >
+        Todos
+      </button>
+      {suppliers.map((supplier) => (
+        <button
+          key={supplier.id}
+          onClick={() => onMarketplaceChange(supplier.id)}
+          className={`px-4 py-2 rounded-full transition-colors ${
+            selectedMarketplace === supplier.id
+              ? "bg-[#FF9900] text-white"
+              : "text-white hover:bg-white/10"
+          }`}
+        >
+          {supplier.name}
+        </button>
+      ))}
     </div>
   );
 };
