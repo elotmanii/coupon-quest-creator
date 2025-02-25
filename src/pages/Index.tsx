@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
@@ -10,31 +9,11 @@ import type { MarketplaceType, Supplier } from "@/types";
 
 const CATEGORIES = ["Electrónica", "Moda", "Libros", "Hogar", "Belleza"];
 
-const ALL_SUPPLIERS: Supplier[] = [
-  {
-    id: "amazon",
-    name: "Amazon",
-    primaryColor: "#FF9900",
-    baseUrl: "https://www.amazon.com"
-  },
-  {
-    id: "aliexpress",
-    name: "AliExpress",
-    primaryColor: "#ff4747",
-    baseUrl: "https://www.aliexpress.com"
-  },
-  {
-    id: "ebay",
-    name: "eBay",
-    primaryColor: "#0063D1",
-    baseUrl: "https://www.ebay.com"
-  }
+const SUPPLIERS: Supplier[] = [
+  { id: "amazon", name: "Amazon" },
+  { id: "aliexpress", name: "AliExpress" },
+  { id: "ebay", name: "eBay" }
 ];
-
-const ENABLED_SUPPLIER_IDS = ["amazon", "aliexpress", "ebay"] as const;
-const SUPPLIERS = ALL_SUPPLIERS.filter(supplier => 
-  ENABLED_SUPPLIER_IDS.includes(supplier.id as typeof ENABLED_SUPPLIER_IDS[number])
-);
 
 const SAMPLE_COUPONS = [
   {
@@ -118,14 +97,12 @@ const Index = () => {
   const [showAdBanner, setShowAdBanner] = useState(false);
 
   useEffect(() => {
-    // Set a timeout to show the banner after 5 seconds
     const timer = setTimeout(() => {
       setShowAdBanner(true);
     }, 5000);
 
-    // Cleanup the timer if the component unmounts
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array means this runs once when component mounts
+  }, []);
 
   const filteredCoupons = SAMPLE_COUPONS.filter((coupon) => {
     const matchesSearch = coupon.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
