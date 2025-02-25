@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
@@ -97,19 +98,15 @@ const Index = () => {
   const [showAdBanner, setShowAdBanner] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowAdBanner(true);
-    }, 5000);
-
+    const timer = setTimeout(() => setShowAdBanner(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
-  const filteredCoupons = SAMPLE_COUPONS.filter((coupon) => {
+  const filteredCoupons = SAMPLE_COUPONS.filter(coupon => {
     const matchesSearch = coupon.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          coupon.code.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || coupon.category === selectedCategory;
     const matchesMarketplace = selectedMarketplace === "all" || coupon.marketplace === selectedMarketplace;
-    
     const isSupplierEnabled = SUPPLIERS.some(supplier => supplier.id === coupon.marketplace);
     
     return matchesSearch && matchesCategory && matchesMarketplace && isSupplierEnabled;
