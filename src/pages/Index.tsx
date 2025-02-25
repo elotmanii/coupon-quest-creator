@@ -118,12 +118,14 @@ const Index = () => {
   const [showAdBanner, setShowAdBanner] = useState(false);
 
   useEffect(() => {
+    // Set a timeout to show the banner after 5 seconds
     const timer = setTimeout(() => {
       setShowAdBanner(true);
     }, 5000);
 
+    // Cleanup the timer if the component unmounts
     return () => clearTimeout(timer);
-  }, []);
+  }, []); // Empty dependency array means this runs once when component mounts
 
   const filteredCoupons = SAMPLE_COUPONS.filter((coupon) => {
     const matchesSearch = coupon.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -137,40 +139,36 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921]">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-br from-[#232F3E] to-[#131921] px-4 py-8">
+      <div className="max-w-6xl mx-auto">
+        <Header />
 
-      {showAdBanner && (
-        <AdBanner 
-          onClose={() => setShowAdBanner(false)}
-          image="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80"
-          link="https://www.amazon.com/deals"
-        />
-      )}
+        {showAdBanner && (
+          <AdBanner 
+            onClose={() => setShowAdBanner(false)}
+            image="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80"
+            link="https://www.amazon.com/deals"
+          />
+        )}
 
-      <div className="sticky top-0 z-10 bg-gradient-to-br from-[#232F3E] to-[#131921] py-4 shadow-lg">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <SearchBar onSearch={setSearchQuery} />
+        <div className="max-w-4xl mx-auto mb-12 space-y-8">
+          <SearchBar onSearch={setSearchQuery} />
 
-            <div className="flex flex-row items-center justify-center gap-4 flex-wrap md:flex-nowrap">
-              <MarketplaceFilter
-                selectedMarketplace={selectedMarketplace}
-                onMarketplaceChange={setSelectedMarketplace}
-                suppliers={SUPPLIERS}
-              />
+          <div className="flex flex-row items-center justify-center gap-4 flex-wrap md:flex-nowrap">
+            <MarketplaceFilter
+              selectedMarketplace={selectedMarketplace}
+              onMarketplaceChange={setSelectedMarketplace}
+              suppliers={SUPPLIERS}
+            />
 
-              <CategoryFilter
-                categories={CATEGORIES}
-                selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
-              />
-            </div>
+            <CategoryFilter
+              categories={CATEGORIES}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
           </div>
         </div>
-      </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
         <CouponGrid coupons={filteredCoupons} />
       </div>
     </div>
